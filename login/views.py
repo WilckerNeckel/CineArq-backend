@@ -38,6 +38,12 @@ def logout_view(request):
 def SaveXls(request):
     pass
 
+@login_required
+def get_authenticated_username(request):
+    username = request.user.username
+    return Response({'username': username})
+
+
 class IsValidTokenView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]

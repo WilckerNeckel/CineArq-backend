@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import IsValidTokenView, login_view, logout_view
+from .views import IsValidTokenView, get_authenticated_username, login_view, logout_view
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 
@@ -12,6 +12,7 @@ urlpatterns = [
     path('api/files/xls/'),
     path('api/auth/login/', login_view, name='login'),
     path('api/auth/logout/', logout_view, name='logout'),
+    path('api/auth/get_username', get_authenticated_username, name='get_username'),
 
 ]
 
