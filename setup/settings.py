@@ -142,3 +142,5 @@ REST_FRAMEWORK = {
    'http://localhost:5173',
 ]"""
 CORS_ORIGIN_ALLOW_ALL = True
+
+

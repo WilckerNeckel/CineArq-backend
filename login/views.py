@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
+from django.contrib.auth import logout as django_logout
+
 from django.contrib.auth.decorators import login_required
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
@@ -8,14 +10,33 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 
-def login(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    user = authenticate(username=username, password=password)
-    if user:
-        django_login(request, user)
-        
 
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # O usuário foi autenticado com sucesso, então podemos logá-lo
+            django_login(request, user)
+            return Response({'message': 'Login realizado com sucesso.'})
+        else:
+            return Response({'error': 'Usuário ou senha inválidos.'}, status=400)
+    else:
+        return Response({'error': 'Método não permitido.'}, status=405)
+
+def logout_view(request):
+    
+    if request.method == 'POST':
+        django_logout(request)
+        return Response({'message': 'Logout realizado com sucesso.'})
+    else:
+        return Response({'error': 'Método não permitido.'}, status=405)
+    
+def SaveXls(request):
+    pass
 
 class IsValidTokenView(APIView):
     authentication_classes = [JWTAuthentication]
