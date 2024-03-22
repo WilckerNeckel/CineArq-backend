@@ -46,8 +46,15 @@ def SaveXls(request):
 @login_required
 def get_authenticated_username(request):
     username = request.user.username
-    return Response({'username': username})
+    return JsonResponse({'username': username})
 
+class get_login_sername(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request):
+        username = request.user.username
+        return Response({'username': username})
 
 class IsValidTokenView(APIView):
     authentication_classes = [JWTAuthentication]
