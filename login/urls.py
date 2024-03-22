@@ -9,7 +9,7 @@ urlpatterns = [
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/auth/token/isvalid/', IsValidTokenView.as_view(), name='isvalid'),
-    path('api/files/xls/'),
+    #path('api/files/xls/'),
     path('api/auth/login/', login_view, name='login'),
     path('api/auth/logout/', logout_view, name='logout'),
     path('api/auth/get_username', get_authenticated_username, name='get_username'),

@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as django_login
@@ -8,32 +9,36 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from django.http import JsonResponse
 
 
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+        data = json.loads(request.body.decode('utf-8'))
+        username = data.get('email')
+        password = data.get('password')
         
         user = authenticate(request, username=username, password=password)
+        print(user)
+        
         
         if user is not None:
             # O usuário foi autenticado com sucesso, então podemos logá-lo
             django_login(request, user)
-            return Response({'message': 'Login realizado com sucesso.'})
+            return JsonResponse({'message': 'Login realizado com sucesso.'})
         else:
-            return Response({'error': 'Usuário ou senha inválidos.'}, status=400)
+            return JsonResponse({'error': 'Usuário ou senha inválidos.'}, status=400)
     else:
-        return Response({'error': 'Método não permitido.'}, status=405)
+        return JsonResponse({'error': 'Método não permitido.'}, status=405)
 
 def logout_view(request):
     
     if request.method == 'POST':
         django_logout(request)
-        return Response({'message': 'Logout realizado com sucesso.'})
+        return JsonResponse({'message': 'Logout realizado com sucesso.'})
     else:
-        return Response({'error': 'Método não permitido.'}, status=405)
+        return JsonResponse({'error': 'Método não permitido.'}, status=405)
     
 def SaveXls(request):
     pass

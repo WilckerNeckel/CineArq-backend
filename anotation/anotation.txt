@@ -1,0 +1,9 @@
+Preciso incluir  o Csf token quando for pra prod
+Preciso guardar o caminho da minha api em uma variável de ambiente
+PReciso guardar a chave do django em uma variável de ambiente
+
+
+
+Atualizações
+
+    Preciso fazer funcionar o login do django 20/03
