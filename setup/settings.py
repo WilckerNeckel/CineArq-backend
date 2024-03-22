@@ -138,6 +138,11 @@ REST_FRAMEWORK = {
     )
 }
 
+# authentication_backends serve para dizer ao django que ele deve usar o model de autenticação padrão
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
+
 """CORS_ORIGIN_WHITELIST = [
    'http://localhost:5173',
 ]"""

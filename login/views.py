@@ -11,9 +11,40 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
 
+class login_view(APIView):
+    def post(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        username = data.get('email')
+        password = data.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        print(user)
+        
+        
+        if user is not None:
+            # O usuário foi autenticado com sucesso, então podemos logá-lo
+            django_login(request, user)
+            return JsonResponse({'message': 'Login realizado com sucesso.'})
+        else:
+            return JsonResponse({'error': 'Usuário ou senha inválidos.'}, status=400)
+    
+class logout_view(APIView):
+    def post(self, request):
+        django_logout(request)
+        return JsonResponse({'message': 'Logout realizado com sucesso.'})
+
+class get_user_credentials(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self, request):
+        username = request.user.username
+        return JsonResponse({'username': username})
 
 
-def login_view(request):
+
+
+
+"""def login_view(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
         username = data.get('email')
@@ -30,8 +61,10 @@ def login_view(request):
         else:
             return JsonResponse({'error': 'Usuário ou senha inválidos.'}, status=400)
     else:
-        return JsonResponse({'error': 'Método não permitido.'}, status=405)
-
+        return JsonResponse({'error': 'Método não permitido.'}, status=405)"""
+    
+    
+"""
 def logout_view(request):
     
     if request.method == 'POST':
@@ -39,22 +72,10 @@ def logout_view(request):
         return JsonResponse({'message': 'Logout realizado com sucesso.'})
     else:
         return JsonResponse({'error': 'Método não permitido.'}, status=405)
-    
+    """
 def SaveXls(request):
     pass
 
-@login_required
-def get_authenticated_username(request):
-    username = request.user.username
-    return JsonResponse({'username': username})
-
-class get_login_sername(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-    
-    def get(self, request):
-        username = request.user.username
-        return Response({'username': username})
 
 class IsValidTokenView(APIView):
     authentication_classes = [JWTAuthentication]
