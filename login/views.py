@@ -10,6 +10,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
+from .models import XlsFile
 
 class login_view(APIView):
     def post(self, request):
@@ -40,7 +41,44 @@ class get_user_credentials(APIView):
         username = request.user.username
         return JsonResponse({'username': username})
 
+class upload_xls_file(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
 
+    
+    def post(self, request):
+        
+        uploaded_file = request.FILES['file']
+        user_id = request.user.id
+        file_instance = XlsFile.objects.create(
+            file_path=uploaded_file,
+            file_name=uploaded_file.name,
+            file_size=uploaded_file.size,
+            user_id=user_id
+        )
+        if upload_xls_file:
+            return JsonResponse({'message': 'Arquivo enviado com sucesso!'})
+        
+        else:
+            return JsonResponse({'error': 'Falha ao enviar o arquivo'}, status=400)
+
+
+
+
+"""    file_name = models.CharField(max_length=100)
+    file_size = models.IntegerField()
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    # Essa linha indica onde o arquivo deve ser armazenado no sistema de arquivos do servidor, e no banco de dados vai ser armazenado somente o caminho para o arquivo
+    file_path = models.FileField(upload_to=user_directory_path)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)      
+"""
+class IsValidTokenView(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Se chegou até aqui, o token é válido
+        return Response({"isvalid": "true"})
 
 
 
@@ -73,17 +111,6 @@ def logout_view(request):
     else:
         return JsonResponse({'error': 'Método não permitido.'}, status=405)
     """
-def SaveXls(request):
-    pass
-
-
-class IsValidTokenView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        # Se chegou até aqui, o token é válido
-        return Response({"isvalid": "true"})
 
 
 '''from django.shortcuts import render
