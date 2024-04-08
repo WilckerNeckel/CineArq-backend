@@ -172,7 +172,6 @@ class WorkSheet:
 class WorkSheetView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
-    #file = None
     
     def post(self, request):
         try:
@@ -198,7 +197,7 @@ class WorkSheetView(APIView):
 
             # Create a file response to return the transformed worksheet
             response = FileResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            response['Content-Disposition'] = 'attachment; filename="transformed_worksheet.xlsx"'
+            response['Content-Disposition'] = 'attachment; filename="planilha_resultante.xlsx"'
 
             response.status_code = 200
             return response
@@ -206,26 +205,6 @@ class WorkSheetView(APIView):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
     
-    # def get(self, request):
-    #     global file
 
-    #     if file is not None:
-    #         #here is created an object that will store the file in memory
-    #         buffer = io.BytesIO()
-            
-    #         file.save(buffer)
-    #         #here we set the pointer to the beginning of the file, to ensure that the file is read from the beginning
-    #         buffer.seek(0)
-
-    #         # Create an HTTP response with the file content
-    #         response = HttpResponse(buffer, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    #         response['Content-Disposition'] = 'attachment; filename="result.xlsx"'
-            
-    #         # Reset the global file variable
-    #         file = None
-
-    #         return response
-        
-    #     return JsonResponse({'error': 'O arquivo não foi processado'}, status=400)
     
             
