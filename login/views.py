@@ -61,6 +61,7 @@ class upload_xls_file(APIView):
         
         else:
             return JsonResponse({'error': 'Falha ao enviar o arquivo'}, status=400)
+        
 
 
 
