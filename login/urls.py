@@ -8,7 +8,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
 
-    #minhas rotas
+    #minhas rotass
     path('api/auth/token/isvalid/', IsValidTokenView.as_view(), name='isvalid'),
     path('api/uploads/xls/', upload_xls_file.as_view(), name='upload_xls_file'),
     path('api/auth/login/', login_view.as_view(), name='login'),
