@@ -15,20 +15,33 @@ from .models import XlsFile
 class login_view(APIView):
     def post(self, request):
         data = json.loads(request.body.decode('utf-8'))
-        username = data.get('email')
+        email = data.get('email')
         password = data.get('password')
+        user = User.objects.filter(email=email).first()
+        if user is not None:
+            username = user.username
+        else:
+            return JsonResponse({'error': 'Usuário não encontrado.'}, status=400)
         
-        user = authenticate(request, username=username, password=password)
+        autenticar = authenticate(request, username=username, password=password)
         print(user)
         
         
-        if user is not None:
+        if autenticar is not None:
             # O usuário foi autenticado com sucesso, então podemos logá-lo
-            django_login(request, user)
+            django_login(request, autenticar)
             return JsonResponse({'message': 'Login realizado com sucesso.'})
         else:
             return JsonResponse({'error': 'Usuário ou senha inválidos.'}, status=400)
-    
+
+class return_username(APIView):
+    def post(self, request):
+        data = json.loads(request.body.decode('utf-8'))
+        email = data.get('email')
+        username = User.objects.filter(email=email).first().username
+        return JsonResponse({'username': username})
+
+        
 class logout_view(APIView):
     def post(self, request):
         django_logout(request)
