@@ -33,6 +33,10 @@ class WorkSheet:
     def load_worksheet(self, ws_file_path, file):
         self.main_wb = load_workbook(file) if file else load_workbook(ws_file_path)
         return self.main_wb
+    
+    def load_codes_worksheet(self, ws_file_path, file):
+        codes_worksheet = load_workbook(file) if file else load_workbook(ws_file_path)
+        return codes_worksheet
 
     def add_column(self, name_column):
         column_last_letter = self.main_ws.cell(row=1, column=self.main_ws.max_column).column_letter
@@ -148,21 +152,19 @@ class WorkSheet:
         return self.main_wb
         
     def return_codes_list(self, codes_file_path=None, codes_file=None):
-        if codes_file is not None:
-            print(f"arquivo codes_list está em formato de arquivo = {codes_file}")
-            codes_list = []
-            data = codes_file.read().decode('utf-8')
-            codes_list = [c.strip() for c in data.split(',')]
-            return codes_list
-        if codes_file_path is not None:
-            print(f"arquivo codes_list está em formato de path = {codes_file_path}")
-            with open(codes_file_path, 'r') as file:
-                data = file.read()
-                codes_list = [c.strip() for c in data.split(',')]
-            return codes_list
+        codes_list = []
         
-        else:
-            raise Exception("O arquivo de códigos não foi encontrado.")
+        codes_worksheet = self.load_codes_worksheet(codes_file_path, codes_file)
+        codes_worksheet = codes_worksheet.active
+        for cell in codes_worksheet['A']:
+            codes_list.append(cell.value)
+        codes_list.pop(0)
+        print(codes_list)
+        return codes_list
+        # data = codes_file.read().decode('utf-8')
+        # codes_list = [c.strip() for c in data.split(',')]
+        # return codes_list
+    
         
     
     def print_codes_list(self):
