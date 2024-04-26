@@ -110,9 +110,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -137,7 +137,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     )
 }
-
+JWT_ACCESS_TOKEN_LIFETIME = 3600
 # authentication_backends serve para dizer ao django que ele deve usar o model de autenticação padrão
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

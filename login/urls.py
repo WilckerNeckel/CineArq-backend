@@ -26,12 +26,3 @@ urlpatterns = [
 
 ]
 
-"""
-router = routers.DefaultRouter()
-router.register('auth', TokenView, basename='auth')
-
-urlpatterns = [
-    path('', include(router.urls)),
-
-]
-"""

@@ -161,12 +161,7 @@ class WorkSheet:
         codes_list.pop(0)
         print(codes_list)
         return codes_list
-        # data = codes_file.read().decode('utf-8')
-        # codes_list = [c.strip() for c in data.split(',')]
-        # return codes_list
-    
-        
-    
+
     def print_codes_list(self):
         print(self.codes_list)
         
