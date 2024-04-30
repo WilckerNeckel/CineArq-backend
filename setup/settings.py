@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d$!p+5ro=12xlg(#-bjt8l9nyv6+d02_3hh*-^%$-#ke+zvbx&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '52.203.193.235', 'www.cinearq.kontech.com.br', 'cinearq.kontech.com.br', 'cinearq.kontech.com.br:8000']
 
 
 # Application definition
@@ -143,9 +143,8 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-"""CORS_ORIGIN_WHITELIST = [
-   'http://localhost:5173',
-]"""
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = [
+   '52.203.193.235'
+]
 
 
