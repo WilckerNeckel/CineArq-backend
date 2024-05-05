@@ -229,19 +229,17 @@ class gerenerate_worksheet(APIView):
                     sheet.cell(row=row_num, column=col_num, value=value)
                 row_num += 1
 
-            workbook.save('./uploads/planilha_gerada.xlsx')
-            return JsonResponse (data={'message': 'Planilha gerada com sucesso'}, status=status.HTTP_200_OK)
-            # output = io.BytesIO()
+            output = io.BytesIO()
 
-            # workbook.save(output)
+            workbook.save(output)
 
-            # output.seek(0)
+            output.seek(0)
 
-            # response = FileResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            # response['Content-Disposition'] = 'attachment; filename="planilha_resultante.xlsx"'
+            response = FileResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = 'attachment; filename="planilha_resultante.xlsx"'
 
-            # response.status_code = 200
-            # return response
+            response.status_code = 200
+            return response
 
         except Exception as e:
             return JsonResponse(data={'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
