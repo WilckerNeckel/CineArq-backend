@@ -29,7 +29,10 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'login',
     'rest_framework_simplejwt',
-    'corsheaders'
+    'corsheaders',
+    'worksheet',
+    'formulario',
+    
 ]
 
 MIDDLEWARE = [
