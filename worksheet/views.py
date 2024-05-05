@@ -5,16 +5,15 @@ from openpyxl.styles import Font, Color
 from openpyxl import Workbook
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
-from openpyxl.utils import column_index_from_string
 from openpyxl.styles import Border, Side
+from requests import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
-from django.http import HttpResponse
-from django.core.files import File
 import io
 from django.http import FileResponse
-
+from formulario.models import Formularios
+from rest_framework import status
 
 
 class WorkSheet:
@@ -201,6 +200,51 @@ class WorkSheetView(APIView):
         
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+        
+class gerenerate_worksheet(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request):
+        try:
+            data = json.loads(request.body.decode('utf-8'))
+            date = data.get('Data')
+            print(date)
+            objects = Formularios.objects.filter(created_at__date=date)
+            # Create a new workbook
+            workbook = Workbook()
+            # Get the active sheet
+            sheet = workbook.active
+
+            # Write headers
+            headers = ['Nome', 'Email', 'CPF', 'Telefone', 'Codigo', 'Data']
+            for col_num, header in enumerate(headers, 1):
+                sheet.cell(row=1, column=col_num, value=header)
+
+            # Write data
+            row_num = 2
+            for obj in objects:
+                data = [obj.nome, obj.email, obj.cpf, obj.telefone, obj.codigo, obj.created_at.strftime("%d/%m/%Y %H:%M:%S")]
+                for col_num, value in enumerate(data, 1):
+                    sheet.cell(row=row_num, column=col_num, value=value)
+                row_num += 1
+
+            workbook.save('./uploads/planilha_gerada.xlsx')
+            return JsonResponse (data={'message': 'Planilha gerada com sucesso'}, status=status.HTTP_200_OK)
+            # output = io.BytesIO()
+
+            # workbook.save(output)
+
+            # output.seek(0)
+
+            # response = FileResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            # response['Content-Disposition'] = 'attachment; filename="planilha_resultante.xlsx"'
+
+            # response.status_code = 200
+            # return response
+
+        except Exception as e:
+            return JsonResponse(data={'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
 
     

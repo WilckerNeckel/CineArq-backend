@@ -1,3 +1,5 @@
+import io
+from django.http import FileResponse
 from rest_framework.views import APIView
 
 from rest_framework.response import Response
@@ -9,6 +11,7 @@ from .models import Formularios
 
 
 class handle_form(APIView):
+    
     permission_classes = [AllowAny]
     def post(self, request):
         try:
@@ -20,8 +23,7 @@ class handle_form(APIView):
             codigo = data.get('Codigo')
             dados_inseridos = Formularios(nome=nome, email=email, cpf=cpf, telefone=telefone, codigo=codigo)
             dados_inseridos.save()
-            print(dados_inseridos)
-            return Response(data=data, status=status.HTTP_200_OK)
-        except:
-            return Response(data={'error': 'Erro ao enviar formulário'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response("Response: Dados enviados com sucesso", status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response(data={f'error': '{e}'}, status=status.HTTP_400_BAD_REQUEST)
 
