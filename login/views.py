@@ -82,4 +82,4 @@ class IsValidTokenView(APIView):
 
     def get(self, request):
         # Se chegou até aqui, o token é válido
-        return Response({"isvalid": "true"})
+        return JsonResponse({'message': 'Token válido.'})
