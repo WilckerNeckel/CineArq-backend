@@ -87,10 +87,10 @@ class WorkSheet:
         for celula in self.main_ws[number_row]:
             string_cell = celula.value
             clear_value_cel = string_cell.lower().strip().replace(" ", "_")
-            if clear_value_cel == "digite_a_sua_senha":
+            if clear_value_cel == "codigos":
                 return celula.column
         
-        raise Exception("A coluna 'Digite a sua senha' não foi encontrada.")
+        raise Exception("A coluna 'Codigos' não foi encontrada.")
 
     def get_number_column_reason(self, number_row):
         for celula in self.main_ws[number_row]:
@@ -217,7 +217,7 @@ class gerenerate_worksheet(APIView):
             sheet = workbook.active
 
             # Write headers
-            headers = ['Nome', 'Email', 'CPF', 'Telefone', 'Codigo', 'Data']
+            headers = ['Nome', 'Email', 'CPF', 'Telefone', 'Codigos', 'Data']
             for col_num, header in enumerate(headers, 1):
                 sheet.cell(row=1, column=col_num, value=header)
 
