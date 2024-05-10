@@ -3,18 +3,17 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-#load_dotenv()
-# SECRET_KEY = os.environ.get("SECRET_KEY")
-# DEBUG = os.environ.get("DEBUG")
-SECRET_KEY = 'django-insecure-d$!p+5ro=12xlg(#-bjt8l9nyv6+d02_3hh*-^%$-#ke+zvbx&'
-DEBUG = True
+load_dotenv()
+SECRET_KEY = os.environ.get("SECRET_KEY")
+DEBUG = bool(os.environ.get("DEBUG"))
+# SECRET_KEY = 'django-insecure-d$!p+5ro=12xlg(#-bjt8l9nyv6+d02_3hh*-^%$-#ke+zvbx&'
+# DEBUG = True
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATABASE_URL = str(os.environ.get("DATABASE_URL_DJANGO"))
+IS_DB_PRODUCTION = bool(os.environ.get("IS_DB_PRODUCTION"))
 
 
 ALLOWED_HOSTS = ['localhost', '52.203.193.235', 'www.cinearq.kontech.com.br', 'cinearq.kontech.com.br', 'cinearq.kontech.com.br:8000', "127.0.0.1"]
-
 
 # Application definition
 
@@ -67,32 +66,32 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'setup.wsgi.application'
 
-# if DATABASE_URL:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': 'djangoreact',
-#             'USER': 'postgres',
-#             'PASSWORD': 'T2%mhgZ3A=?%6$vKwB!2',
-#             'HOST': '127.0.0.1',
-#             'PORT': '5432',
-#         }
-#     }
-    
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.sqlite3',
-#             'NAME': BASE_DIR / 'db.sqlite3',
-#         }
-#     }
-
-DATABASES = {
-    'default': {
-    'ENGINE': 'django.db.backends.sqlite3',
-    'NAME': BASE_DIR / 'db.sqlite3',
+if IS_DB_PRODUCTION:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'djangoreact',
+            'USER': 'postgres',
+            'PASSWORD': 'T2%mhgZ3A=?%6$vKwB!2',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
         }
-}
+    }
+    
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
+# DATABASES = {
+#     'default': {
+#     'ENGINE': 'django.db.backends.sqlite3',
+#     'NAME': BASE_DIR / 'db.sqlite3',
+#         }
+# }
             
 
 AUTH_PASSWORD_VALIDATORS = [

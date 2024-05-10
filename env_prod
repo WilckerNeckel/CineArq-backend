@@ -1,3 +1,3 @@
 SECRET_KEY = 'django-insecure-d$!p+5ro=12xlg(#-bjt8l9nyv6+d02_3hh*-^%$-#ke+zvbx&'
-DEBUG = 'True'
-#IS_DB_PRODUCTION = 'False'
+DEBUG = 'False'
+IS_DB_PRODUCTION = 'True'

@@ -11,9 +11,14 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.http import JsonResponse
 from .models import XlsFile
+from dotenv import load_dotenv
+import os
+
 
 class login_view(APIView):
+
     def post(self, request):
+
         data = json.loads(request.body.decode('utf-8'))
         email = data.get('email')
         password = data.get('password')
