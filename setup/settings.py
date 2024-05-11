@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'worksheet',
     'formulario',
+    'area_admin',
     
 ]
 
