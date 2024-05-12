@@ -23,7 +23,6 @@ class enable_form(APIView):
             is_enabled = EnableForm.objects.first().is_enabled
             print(is_enabled)
             return Response({"ResponseGET": str(is_enabled).lower()}, status=status.HTTP_200_OK)
-
         except Exception as e:
             return Response({f'GETerror': '{e}'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -42,6 +41,7 @@ class enable_form(APIView):
             form.last_modified_user_id = user
             
             form.save()
+            
             return Response({"ResponsePUT": str(form).lower()}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({f'PUTerror': '{e}'}, status=status.HTTP_400_BAD_REQUEST)

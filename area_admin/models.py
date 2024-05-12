@@ -8,3 +8,4 @@ class EnableForm(models.Model):
     
     def __str__(self):
         return str(self.is_enabled)
+    
