@@ -7,4 +7,5 @@ urlpatterns = [
     path('', include('login.urls')),
     path('', include('worksheet.urls')),
     path('', include('formulario.urls')),
+    path('', include('area_admin.urls')),
 ]
