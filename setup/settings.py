@@ -73,7 +73,7 @@ if IS_DB_PRODUCTION:
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': 'djangoreact',
             'USER': 'postgres',
-            'PASSWORD': 'T2%mhgZ3A=?%6$vKwB!2',
+            'PASSWORD': 'Admin@123Postgres',
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
