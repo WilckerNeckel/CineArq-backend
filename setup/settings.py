@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 IS_DB_PRODUCTION = bool(os.environ.get("IS_DB_PRODUCTION"))
 
 
-ALLOWED_HOSTS = ['localhost', '52.203.193.235', 'www.cinearq.kontech.com.br', 'cinearq.kontech.com.br', 'cinearq.kontech.com.br:8000', "127.0.0.1"]
+ALLOWED_HOSTS = ['localhost', "127.0.0.1", "cinearqmt.com.br", "www.cinearqmt.com.br"]
 
 # Application definition
 
@@ -151,4 +151,3 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-#retirar quando for pra produção
