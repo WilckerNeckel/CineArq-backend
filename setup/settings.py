@@ -141,6 +141,8 @@ AUTHENTICATION_BACKENDS = [
 CORS_ORIGIN_WHITELIST = [
     'https://localhost',
     'https://127.0.0.1',
+    'cinearqmt.com.br',
+    'https://cinearqmt.com.br',
 ]
 
 STATIC_URL = '/static/'
