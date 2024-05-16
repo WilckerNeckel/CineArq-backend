@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 IS_DB_PRODUCTION = bool(os.environ.get("IS_DB_PRODUCTION"))
 
 
-ALLOWED_HOSTS = ['localhost', "127.0.0.1", "cinearqmt.com.br", "www.cinearqmt.com.br"]
+ALLOWED_HOSTS = ['http://localhost', "127.0.0.1", "cinearqmt.com.br", "www.cinearqmt.com.br", "api.cinearqmt.com.br", "www.api.cinearqmt.com.br"]
 
 # Application definition
 
@@ -143,6 +143,8 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8080',
     'cinearqmt.com.br',
     'https://cinearqmt.com.br',
+    "api.cinearqmt.com.br",
+    "www.api.cinearqmt.com.br"
 ]
 
 STATIC_URL = '/static/'
