@@ -139,8 +139,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost',
-    'http://127.0.0.1',
+    'http://localhost:8080',
+    'http://127.0.0.1:8080',
     'cinearqmt.com.br',
     'https://cinearqmt.com.br',
 ]
