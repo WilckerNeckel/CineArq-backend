@@ -13,15 +13,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 IS_DB_PRODUCTION = bool(os.environ.get("IS_DB_PRODUCTION"))
 
 
-ALLOWED_HOSTS = ['http://localhost', 
-                 "127.0.0.1", 
-                 "cinearqmt.com.br", 
-                 "www.cinearqmt.com.br", 
-                 "api.cinearqmt.com.br", 
-                 "www.api.cinearqmt.com.br",
-                "https://api.cinearqmt.com.br",
-                "https://www.api.cinearqmt.com.br",
-                ]
+# ALLOWED_HOSTS = ['http://localhost', 
+#                  "127.0.0.1", 
+#                  "cinearqmt.com.br", 
+#                  "www.cinearqmt.com.br", 
+#                  "api.cinearqmt.com.br", 
+#                  "www.api.cinearqmt.com.br",
+#                 "https://api.cinearqmt.com.br",
+#                 "https://www.api.cinearqmt.com.br",
+#                 ]
+
+ALLOWED_HOSTS = ['*']
+
 
 # Application definition
 
@@ -146,16 +149,18 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:8080',
-    'http://127.0.0.1:8080',
-    'cinearqmt.com.br',
-    'https://cinearqmt.com.br',
-    "https://api.cinearqmt.com.br",
-    "https://www.api.cinearqmt.com.br",
-    "api.cinearqmt.com.br"
-    "www.api.cinearqmt.com.br"
-]
+CORS_ORIGIN_WHITELIST = ['*']
+
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:8080',
+#     'http://127.0.0.1:8080',
+#     'cinearqmt.com.br',
+#     'https://cinearqmt.com.br',
+#     "https://api.cinearqmt.com.br",
+#     "https://www.api.cinearqmt.com.br",
+#     "api.cinearqmt.com.br"
+#     "www.api.cinearqmt.com.br"
+# ]
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
