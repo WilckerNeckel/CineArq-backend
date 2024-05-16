@@ -143,7 +143,9 @@ CORS_ORIGIN_WHITELIST = [
     'http://127.0.0.1:8080',
     'cinearqmt.com.br',
     'https://cinearqmt.com.br',
-    "api.cinearqmt.com.br",
+    "https://api.cinearqmt.com.br",
+    "https://www.api.cinearqmt.com.br",
+    "api.cinearqmt.com.br"
     "www.api.cinearqmt.com.br"
 ]
 
