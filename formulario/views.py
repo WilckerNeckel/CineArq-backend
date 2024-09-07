@@ -25,5 +25,7 @@ class handle_form(APIView):
             dados_inseridos.save()
             return Response("Response: Dados enviados com sucesso", status=status.HTTP_200_OK)
         except Exception as e:
+            print("erro: ", e)
             return Response(data={f'error': '{e}'}, status=status.HTTP_400_BAD_REQUEST)
+
 
