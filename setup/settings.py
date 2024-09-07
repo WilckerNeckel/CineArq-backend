@@ -82,14 +82,14 @@ if IS_DB_PRODUCTION:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'djangoreact',
+            'NAME': 'cinearq',
             'USER': 'postgres',
             'PASSWORD': 'Admin@123Postgres',
-            'HOST': '127.0.0.1',
+            'HOST': 'db',  # Nome do serviço PostgreSQL no docker-compose
             'PORT': '5432',
         }
     }
-    
+
 else:
     DATABASES = {
         'default': {
