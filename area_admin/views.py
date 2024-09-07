@@ -44,5 +44,7 @@ class enable_form(APIView):
             
             return Response({"ResponsePUT": str(form).lower()}, status=status.HTTP_200_OK)
         except Exception as e:
+            print("erro: ", e)
+
             return Response({f'PUTerror': '{e}'}, status=status.HTTP_400_BAD_REQUEST)
 
